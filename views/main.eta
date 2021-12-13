@@ -1,0 +1,15 @@
+<% layout('./layouts/layout.eta') %>
+<h1 class="display-title">Quiz app</h1>
+<nav class="nav-inline">
+  <ul>
+    <li>
+	<a href="/auth/register">Register a new account</a>
+    </li>
+    <li>
+	<a href="/auth/login">Log in</a>
+    </li>
+    <li>
+	<a href="/questions">Already logged in? See your questions</a>
+    </li>
+  </ul>
+</nav>

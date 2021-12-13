@@ -1,0 +1,44 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1><%= it.question.title %></h1>
+
+<h2><%= it.question.question_text %></h2>
+
+<h2>Options:</h2>
+
+<% if (it.options && it.options.length > 0) { %>
+
+<ul>
+<% it.options.forEach(option => { %>
+  <li> <%= option.option_text %> <%= option.is_correct %></li>
+  <form method="POST" action="/questions/<%= option.question_id%>/options/<%= option.id%>/delete"/>
+  <input type="submit" value = "Delete option"/>
+  </form>
+<% }); %>
+</ul>
+
+<% } else { %>
+  <p>No options yet!</p>
+<% } %>
+
+<h2>Add an answer option</h2>
+
+<% if (it.optionData) { %>
+<ul>
+    <% Object.keys(it.optionData.errors).forEach((attribute) => { %>
+        <% Object.values(it.optionData.errors[attribute]).forEach((err) => { %>
+            <li><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
+
+<form method="POST" action="/questions/<%= it.question.id%>/options"/>
+Option:<br/>
+<input type="textarea" name="option_text"/><br/>
+Check for the correct option:<br/>
+<input type="checkbox" name="is_correct"/><br/>
+<input type="submit" value="Add"/>
+</form>
+
+<a href="/questions">Go back to questions</a>
